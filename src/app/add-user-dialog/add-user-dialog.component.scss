@@ -1,5 +1,15 @@
 .form-row {
     display: flex;
-    gap: 16px;
+    justify-content: space-between;
     margin-bottom: 16px;
+}
+
+mat-dialog-content {
+    width: 500px;
+    height: 600px;
+    overflow: hidden;
+}
+
+.full-width {
+    width: 100%;
 }
