@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MatDialogContent,
   MatDialogActions,
@@ -8,25 +8,14 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import {
   FormsModule, 
-  FormControl,
-  FormGroupDirective,
-  NgForm,
-  Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import {ErrorStateMatcher} from '@angular/material/core';
 import { User } from '../models/user.class';
-
-// export class MyErrorStateMatcher implements ErrorStateMatcher {
-//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-//     const isSubmitted = form && form.submitted;
-//     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-//   }
-// }
+import { addDoc, collection, doc, Firestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -39,13 +28,28 @@ import { User } from '../models/user.class';
 export class AddUserDialogComponent {
   user = new User;
   birthday!: Date;
-  // emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  // matcher = new MyErrorStateMatcher();
+  firestore = inject(Firestore);
 
-  constructor(public dialogRef: MatDialogRef<AddUserDialogComponent>) { }
+  constructor(public dialogRef: MatDialogRef<AddUserDialogComponent>) { 
+    
+  }
 
-  saveUser() {
-    this.user.birthday = this.birthday.getTime();
-    console.log(this.user);
+  async saveUser() {
+    if(this.user.birthday) {
+      this.user.birthday = this.birthday.getTime();
+    }
+    await addDoc(this.getUserRef(), this.user.toJson()).catch(
+      (err) => {console.error(err)}
+    ).then(
+      () => {console.log(this.user)}
+    );
+  }
+
+  getUserRef() {
+    return collection(this.firestore, 'users');
+  }
+
+  getSingleUserRef(colId: string, docId: string) {
+    return doc(collection(this.firestore, colId), docId);
   }
 }
