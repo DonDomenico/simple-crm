@@ -3,3 +3,43 @@ button {
     bottom: 60px;
     right: 60px;
 }
+
+table {
+    width: 100%;
+    text-align: left;
+    font-family: sans-serif;
+    border-spacing: 0;
+
+    th {
+        background-color: #3F51B5;
+        color: white;
+    }
+
+    th,
+    td {
+        padding: 16px;
+    }
+
+    tr {
+        &:nth-child(even) {
+            background-color: #f2f2f2d7;
+        }
+
+        &:hover {
+            background-color: rgba(80, 229, 255, 0.719);
+            cursor: pointer;
+
+            &:first-child {
+                cursor: unset;
+            }
+        }
+    }
+}
+
+.mat-mdc-card-content:first-child {
+    padding-top: 0;
+}
+
+.mat-mdc-card-content {
+    padding: 0 0;
+}

@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatTooltipModule, TooltipPosition } from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   MatDialog,
   MatDialogClose,
 } from '@angular/material/dialog';
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatTooltipModule, MatDialogClose],
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule, MatDialogClose, MatCardModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })

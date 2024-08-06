@@ -1,3 +1,6 @@
+@if (loading == true) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
 <mat-dialog-content>
     <h2 mat-dialog-title>Add user</h2>
     <div class="form-row">
@@ -47,6 +50,6 @@
 
     <mat-dialog-actions>
         <button mat-button mat-dialog-close="">Cancel</button>
-        <button mat-button cdkFocusInitial mat-dialog-close="" (click)="saveUser()">Save</button>
+        <button mat-button cdkFocusInitial (click)="saveUser()">Save</button>
     </mat-dialog-actions>
 </mat-dialog-content>
