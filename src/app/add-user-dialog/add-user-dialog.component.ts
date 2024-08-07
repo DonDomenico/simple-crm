@@ -15,8 +15,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { User } from '../models/user.class';
-import { addDoc, collection, doc, Firestore } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FirebaseServicesService } from '../firebase-services.service';
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -28,34 +28,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 })
 export class AddUserDialogComponent {
   user = new User;
-  birthday!: Date;
-  firestore = inject(Firestore);
-  loading = false;
-
+  firebase = inject(FirebaseServicesService);
+  
   constructor(public dialogRef: MatDialogRef<AddUserDialogComponent>) { 
     
-  }
-
-  async saveUser() {
-    this.loading = true;
-    if(this.user.birthday != null) {
-      this.user.birthday = this.birthday.getTime();
-    }
-    await addDoc(this.getUserRef(), this.user.toJson()).catch(
-      (err) => {console.error(err)}
-    ).then(
-      () => {
-        this.loading = false;
-        this.dialogRef.close(console.log(this.user));
-      }
-    );
-  }
-
-  getUserRef() {
-    return collection(this.firestore, 'users');
-  }
-
-  getSingleUserRef(colId: string, docId: string) {
-    return doc(collection(this.firestore, colId), docId);
   }
 }
