@@ -3,7 +3,6 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { addDoc, collection, Firestore } from '@angular/fire/firestore';
 import { User } from './models/user.class';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -22,20 +21,24 @@ export class FirebaseServicesService {
   }
 
   ngOnDestroy() {
-    // this.unsubUserList();
+    this.unsubUserList();
   }
 
   subUserList() {
     return onSnapshot(this.getUserRef(), list => {
       list.forEach(element => {
         console.log(this.toJson(element.data(), element.id));
+        this.users.push(this.toJson(element.data(), element.id));
       })
     })
   }
 
   async saveUser() {
     this.loading = true;
-    this.user.birthday = this.birthday.getTime();
+    this.users = [];
+    if (this.birthday != null) {
+      this.user.birthday = this.birthday.getTime();
+    }
     await addDoc(this.getUserRef(), this.toJson(this.user)).catch(
       (err) => { console.error(err) }
     ).then(
@@ -56,14 +59,14 @@ export class FirebaseServicesService {
 
   toJson(obj: any, id?: string): User {
     return {
-        id: id || "",
-        firstName: obj.firstName || "",
-        lastName: obj.lastName || "",
-        email: obj.email || "",
-        birthday: obj.birthday || 0,
-        street: obj.street || "",
-        zipCode: obj.zipCode || 0,
-        city: obj.city || ""
+      id: id || "",
+      firstName: obj.firstName || "",
+      lastName: obj.lastName || "",
+      email: obj.email || "",
+      birthday: obj.birthday || "",
+      street: obj.street || "",
+      zipCode: obj.zipCode || 0,
+      city: obj.city || ""
     }
   }
 }

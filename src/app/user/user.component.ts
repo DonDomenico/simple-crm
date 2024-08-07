@@ -8,6 +8,7 @@ import {
 } from '@angular/material/dialog';
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 import { MatCardModule } from '@angular/material/card';
+import { FirebaseServicesService } from '../firebase-services.service';
 
 
 @Component({
@@ -18,12 +19,13 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './user.component.scss'
 })
 export class UserComponent {
-  
+  firebase = inject(FirebaseServicesService);
+
   constructor(public dialog: MatDialog) {
-    
+
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AddUserDialogComponent);
+  openDialog() {
+    this.dialog.open(AddUserDialogComponent);
   }
 }

@@ -27,10 +27,12 @@ import { FirebaseServicesService } from '../firebase-services.service';
   providers: [provideNativeDateAdapter()]
 })
 export class AddUserDialogComponent {
-  user = new User;
+  // user = new User;
   firebase = inject(FirebaseServicesService);
   
-  constructor(public dialogRef: MatDialogRef<AddUserDialogComponent>) { 
-    
+  constructor(public dialogRef: MatDialogRef<AddUserDialogComponent>) { }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 }
