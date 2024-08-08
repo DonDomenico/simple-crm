@@ -9,12 +9,13 @@ import {
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 import { MatCardModule } from '@angular/material/card';
 import { FirebaseServicesService } from '../firebase-services.service';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatTooltipModule, MatDialogClose, MatCardModule],
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule, MatDialogClose, MatCardModule, RouterLink],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })

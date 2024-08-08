@@ -9,7 +9,7 @@
             </tr>
 
             @for (user of firebase.users; track $index) {
-                <tr>
+                <tr [routerLink]="['/user/'+ user.id]">
                     <td>{{ user.lastName }}</td>
                     <td>{{ user.firstName }}</td>
                     <td>{{ user.email }}</td>
@@ -19,7 +19,7 @@
         </table>
     </mat-card-content>
 </mat-card>
-  
+
 <button (click)="openDialog()" mat-fab color="primary" matTooltip="Add user" matTooltipPosition="above">
     <mat-icon>add</mat-icon>
 </button>
