@@ -1,0 +1,13 @@
+.user-card-container {
+    display: flex;
+    justify-content: center;
+}
+
+.user-card {
+    max-width: 460px;
+}
+
+.example-header-image {
+    background-image: url('../../../assets/img/profile-pic.png');
+    background-size: cover;
+}

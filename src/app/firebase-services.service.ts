@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { doc, onSnapshot } from "firebase/firestore";
 import { addDoc, collection, Firestore } from '@angular/fire/firestore';
 import { User } from './models/user.class';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,13 @@ export class FirebaseServicesService {
   firestore = inject(Firestore);
   user = new User();
   users: User[] = [];
+  userId: string | null = '';
   unsubUserList;
-  // unsubSingleUser;
   birthday!: Date;
   loading = false;
 
   constructor() {
     this.unsubUserList = this.subUserList();
-
   }
 
   ngOnDestroy() {
@@ -51,10 +51,6 @@ export class FirebaseServicesService {
 
   getUserRef() {
     return collection(this.firestore, 'users');
-  }
-
-  getSingleUserRef(colId: string, docId: string) {
-    return doc(collection(this.firestore, colId), docId);
   }
 
   toJson(obj: any, id?: string): User {
