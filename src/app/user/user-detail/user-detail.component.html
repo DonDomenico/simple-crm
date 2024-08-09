@@ -2,22 +2,34 @@
     <mat-card class="user-card">
         <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>{{ user.firstName }} {{ user.lastName }}</mat-card-title>
-            <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+            <div class="header-text">
+                <mat-card-title>{{ user.firstName }} {{ user.lastName }}</mat-card-title>
+                <mat-card-subtitle style="color: white;">{{ user.email }}</mat-card-subtitle>
+            </div>
         </mat-card-header>
-        <img mat-card-image src="./assets/img/profile-pic.png" alt="profile pic avatar">
-        <mat-card-content>
-            <mat-card-title>Address</mat-card-title>
-            <mat-card-subtitle>{{ user.street }}</mat-card-subtitle>
-            <mat-card-subtitle>{{ user.zipCode }}</mat-card-subtitle>
-            <mat-card-subtitle>{{ user.city }}</mat-card-subtitle>
 
-            <mat-card-title>Birthday</mat-card-title>
-            <mat-card-subtitle>{{ user.birthday }}</mat-card-subtitle>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-        </mat-card-actions>
+
+        <div class="card-body">
+            <mat-card-content>
+                @if (user.street || user.zipCode || user.city) {
+                <mat-card-title>Address</mat-card-title>
+                <mat-card-subtitle>{{ user.street }}</mat-card-subtitle>
+                <mat-card-subtitle>{{ user.zipCode }}</mat-card-subtitle>
+                <mat-card-subtitle>{{ user.city }}</mat-card-subtitle>
+                }
+
+                @if (user.birthday) {
+                <mat-card-title>Birthday</mat-card-title>
+                <mat-card-subtitle>{{ user.birthday }}</mat-card-subtitle>
+                }
+            </mat-card-content>
+
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="editUser()">Edit</button>
+            </mat-menu>
+        </div>
     </mat-card>
 </div>

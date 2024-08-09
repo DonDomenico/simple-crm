@@ -4,11 +4,13 @@ import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user.class';
 import { collection, doc, Firestore, onSnapshot } from '@angular/fire/firestore';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
 
 @Component({
   selector: 'app-user-detail',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule],
+  imports: [MatCardModule, MatButtonModule, MatIconModule, MatMenuModule],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss'
 })
@@ -56,5 +58,9 @@ export class UserDetailComponent {
       zipCode: obj.zipCode || "",
       city: obj.city || ""
     }
+  }
+
+  editUser() {
+    
   }
 }

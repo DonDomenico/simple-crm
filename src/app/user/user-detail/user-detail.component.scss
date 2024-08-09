@@ -4,10 +4,34 @@
 }
 
 .user-card {
-    max-width: 460px;
+    width: 80%;
+    min-width: 460px;
 }
 
 .example-header-image {
     background-image: url('../../../assets/img/profile-pic.png');
     background-size: cover;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-card-header {
+    height: 200px;
+    background-color: rgb(248, 130, 87);
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+
+    .mat-mdc-card-avatar {
+        height: 80px;
+        width: 80px;
+    }
+
+    .header-text {
+        height: 80px;
+        color: white;
+    }
 }
