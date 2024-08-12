@@ -18,17 +18,19 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FirebaseServicesService } from '../firebase-services.service';
 
 @Component({
-  selector: 'app-add-user-dialog',
+  selector: 'app-edit-user-dialog',
   standalone: true,
   imports: [MatDialogContent, MatDialogActions, MatInputModule, MatDialogClose, MatButtonModule, FormsModule, MatFormFieldModule, MatDatepickerModule, ReactiveFormsModule, MatProgressBarModule],
-  templateUrl: './add-user-dialog.component.html',
-  styleUrl: './add-user-dialog.component.scss',
+  templateUrl: './edit-user-dialog.component.html',
+  styleUrl: './edit-user-dialog.component.scss',
   providers: [provideNativeDateAdapter()]
 })
-export class AddUserDialogComponent {
+export class EditUserDialogComponent {
   firebase = inject(FirebaseServicesService);
-  
-  constructor(public dialogRef: MatDialogRef<AddUserDialogComponent>) { }
+
+  constructor(public dialogRef: MatDialogRef<EditUserDialogComponent>) {
+
+  }
 
   closeDialog() {
     this.dialogRef.close();
